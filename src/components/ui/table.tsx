@@ -117,12 +117,7 @@ export function Table<T extends Record<string, any>>({
               </option>
             ))}
           </select>
-          <Typography variant="small" className="text-zinc-500 dark:text-zinc-400">
-            {t('table.showing')} {totalItems === 0 ? 0 : startIndex + 1} {t('table.to')}{' '}
-            {Math.min(endIndex, totalItems)} {t('table.of')} {totalItems} {t('table.results')}
-          </Typography>
         </div>
-
         <div className="relative z-50">
           <Menu
             trigger={
@@ -159,7 +154,7 @@ export function Table<T extends Record<string, any>>({
       </div>
 
       <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 w-full">
-        <div className="relative w-full">
+        <div className="relative w-full max-w-[calc(100vw-32px)]">
           <div className="overflow-x-auto w-full">
             <div className="w-full">
               <table className="w-full divide-y divide-zinc-200 dark:divide-zinc-800">
@@ -181,9 +176,17 @@ export function Table<T extends Record<string, any>>({
                               )
                             }
                             className="flex items-center gap-1 hover:text-zinc-900 dark:hover:text-zinc-50"
-                            title={sortColumn === column.key 
-                              ? t('table.sortingBy', { column: column.label, direction: sortDirection === 'asc' ? t('table.ascending') : t('table.descending') })
-                              : t('table.sortBy', { column: column.label })}
+                            title={
+                              sortColumn === column.key
+                                ? t('table.sortingBy', {
+                                    column: column.label,
+                                    direction:
+                                      sortDirection === 'asc'
+                                        ? t('table.ascending')
+                                        : t('table.descending'),
+                                  })
+                                : t('table.sortBy', { column: column.label })
+                            }
                           >
                             {column.label}
                             {sortColumn === column.key && (
@@ -253,7 +256,7 @@ function TableSkeleton({ columns }: { columns: Column[] }) {
       </div>
 
       <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 w-full">
-        <div className="relative w-full">
+        <div className="relative w-full max-w-[calc(100vw-32px)]">
           <div className="overflow-x-auto w-full">
             <div className="w-full">
               <table className="w-full divide-y divide-zinc-200 dark:divide-zinc-800">
@@ -286,7 +289,7 @@ function TableSkeleton({ columns }: { columns: Column[] }) {
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-3">
         <div className="h-4 w-48 bg-zinc-200 dark:bg-zinc-800 rounded animate-pulse" />
         <div className="flex items-center gap-2">
           <div className="h-8 w-20 bg-zinc-200 dark:bg-zinc-800 rounded animate-pulse" />

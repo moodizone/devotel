@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Button } from './button';
 
 interface MenuProps {
   trigger: React.ReactNode;
@@ -24,16 +23,9 @@ export function Menu({ trigger, children, align = 'right' }: MenuProps) {
 
   return (
     <div className="relative" ref={menuRef}>
-      <div onClick={() => setIsOpen(!isOpen)}>
-        {trigger}
-      </div>
+      <div onClick={() => setIsOpen(!isOpen)}>{trigger}</div>
 
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-30"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
+      {isOpen && <div className="fixed inset-0 z-30" onClick={() => setIsOpen(false)} />}
       <div className="relative">
         {isOpen && (
           <div
@@ -44,12 +36,10 @@ export function Menu({ trigger, children, align = 'right' }: MenuProps) {
               z-40
             `}
           >
-            <div className="p-2">
-              {children}
-            </div>
+            <div className="p-2">{children}</div>
           </div>
         )}
       </div>
     </div>
   );
-} 
+}
