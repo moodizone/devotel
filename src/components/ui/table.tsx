@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { Typography } from './typography';
 import { Button } from './button';
 import { Menu } from './menu';
 import { Checkbox } from './checkbox';
 import { Pagination } from './pagination';
+import type { TableData } from '../../pages/submissions';
 
 interface Column {
   key: string;
@@ -12,22 +14,17 @@ interface Column {
   visible: boolean;
 }
 
-interface TableProps<T> {
+interface TableProps {
   columns: Column[];
-  data: T[];
+  data: TableData['data'];
   isLoading?: boolean;
   error?: string;
   onToggleColumn?: (column: string) => void;
 }
 
-export function Table<T extends Record<string, any>>({
-  columns,
-  data,
-  isLoading,
-  error,
-  onToggleColumn,
-}: TableProps<T>) {
+export function Table({ columns, data, isLoading, error, onToggleColumn }: TableProps) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [sortColumn, setSortColumn] = React.useState<string>();
   const [sortDirection, setSortDirection] = React.useState<'asc' | 'desc'>('asc');
   const [page, setPage] = React.useState(1);
@@ -214,7 +211,8 @@ export function Table<T extends Record<string, any>>({
                   {paginatedData.map((row, rowIndex) => (
                     <tr
                       key={row.id || rowIndex}
-                      className="hover:bg-zinc-50 dark:hover:bg-zinc-900"
+                      className="hover:bg-zinc-50 dark:hover:bg-zinc-900 cursor-pointer"
+                      onClick={() => navigate(`/submissions/${row.id}`)}
                     >
                       {visibleColumns.map(column => (
                         <td
@@ -246,6 +244,7 @@ export function Table<T extends Record<string, any>>({
 
 function TableSkeleton({ columns }: { columns: Column[] }) {
   const visibleColumns = columns.filter(col => col.visible);
+  const minColumns = Math.max(visibleColumns.length, 3);
 
   return (
     <div className="space-y-4 w-full">
@@ -261,9 +260,9 @@ function TableSkeleton({ columns }: { columns: Column[] }) {
               <table className="w-full divide-y divide-zinc-200 dark:divide-zinc-800">
                 <thead>
                   <tr>
-                    {visibleColumns.map(column => (
+                    {Array.from({ length: minColumns }).map((_, index) => (
                       <th
-                        key={column.key}
+                        key={index}
                         className="sticky top-0 z-20 px-4 py-3 text-left text-sm font-medium text-zinc-500 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-900"
                       >
                         <div className="h-4 w-24 bg-zinc-200 dark:bg-zinc-800 rounded animate-pulse" />
@@ -274,8 +273,8 @@ function TableSkeleton({ columns }: { columns: Column[] }) {
                 <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
                   {[1, 2, 3].map(row => (
                     <tr key={row}>
-                      {visibleColumns.map(column => (
-                        <td key={column.key} className="px-4 py-3">
+                      {Array.from({ length: minColumns }).map((_, index) => (
+                        <td key={index} className="px-4 py-3">
                           <div className="h-4 w-32 bg-zinc-200 dark:bg-zinc-800 rounded animate-pulse" />
                         </td>
                       ))}
