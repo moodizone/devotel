@@ -14,7 +14,7 @@ interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
     | 'large'
     | 'small'
     | 'muted';
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
 }
 
 const Typography = React.forwardRef<HTMLElement, TypographyProps>(
@@ -37,7 +37,8 @@ const Typography = React.forwardRef<HTMLElement, TypographyProps>(
     };
 
     return (
-      <Component className={twMerge(variants[variant], className)} ref={ref as any} {...props} />
+      //@ts-expect-error skip
+      <Component className={twMerge(variants[variant], className)} ref={ref} {...props} />
     );
   }
 );
