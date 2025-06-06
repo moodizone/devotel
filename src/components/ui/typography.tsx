@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
   variant?:
@@ -36,7 +37,7 @@ const Typography = React.forwardRef<HTMLElement, TypographyProps>(
     };
 
     return (
-      <Component className={`${variants[variant]} ${className}`} ref={ref as any} {...props} />
+      <Component className={twMerge(variants[variant], className)} ref={ref as any} {...props} />
     );
   }
 );
