@@ -9,11 +9,12 @@ import type { TableData } from '../../../services/submissions';
 interface TableBodyProps {
   data: TableData['data'];
   columns: Column[];
+  uniqueKey: string;
   hasActiveFilters: boolean;
   onClearFilters: () => void;
 }
 
-export const TableBody = React.memo(({ data, columns, hasActiveFilters, onClearFilters }: TableBodyProps) => {
+export const TableBody = React.memo(({ data, columns, uniqueKey, hasActiveFilters, onClearFilters }: TableBodyProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const visibleColumns = columns.filter(col => col.visible);
@@ -43,9 +44,9 @@ export const TableBody = React.memo(({ data, columns, hasActiveFilters, onClearF
     <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
       {data.map((row, rowIndex) => (
         <tr
-          key={row.id || rowIndex}
+          key={row[uniqueKey] || rowIndex}
           className="hover:bg-zinc-50 dark:hover:bg-zinc-900 cursor-pointer"
-          onClick={() => navigate(`/submissions/${row.id}`)}
+          onClick={() => navigate(`/submissions/${row[uniqueKey]}`)}
         >
           {visibleColumns.map(column => (
             <td

@@ -4,7 +4,6 @@ export type DataType = string | number | boolean;
 export interface TableData {
   columns: string[];
   data: {
-    id: string;
     [key: string]: DataType;
   }[];
 }

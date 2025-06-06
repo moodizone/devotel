@@ -75,6 +75,7 @@ export default function Submissions() {
         searchableColumns={['Full Name']}
         andFilterColumns={[{ key: 'Gender', label: 'Gender' }]}
         orFilterColumns={[{ key: 'Insurance Type', label: 'Insurance Type' }]}
+        uniqueKey="id"
       />
     </div>
   );

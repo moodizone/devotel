@@ -12,6 +12,7 @@ import type { TableProps } from './types';
 export function Table({
   columns,
   data,
+  uniqueKey,
   isLoading,
   error,
   onToggleColumn,
@@ -224,6 +225,7 @@ export function Table({
                 <TableBody
                   data={paginatedData}
                   columns={columns}
+                  uniqueKey={uniqueKey}
                   hasActiveFilters={hasActiveFilters}
                   onClearFilters={handleClearFilters}
                 />
