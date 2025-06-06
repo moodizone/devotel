@@ -36,13 +36,15 @@ export default function Forms() {
     staleTime: 5 * 60 * 1000, // Consider data fresh for 5 minutes
   });
 
-  const [formData, setFormData] = React.useState<Array<{
-    formId: string;
-    title: string;
-    totalFields: number;
-    requiredFields: number;
-    order: number;
-  }>>([]);
+  const [formData, setFormData] = React.useState<
+    Array<{
+      formId: string;
+      title: string;
+      totalFields: number;
+      requiredFields: number;
+      order: number;
+    }>
+  >([]);
 
   React.useEffect(() => {
     const processedData = forms.map((form, index) => {
@@ -58,19 +60,6 @@ export default function Forms() {
     setFormData(processedData);
   }, [forms]);
 
-  const handleOrderChange = (newForms: Array<{
-    formId: string;
-    title: string;
-    totalFields: number;
-    requiredFields: number;
-    order: number;
-  }>) => {
-    setFormData(newForms);
-    // Here you would typically make an API call to persist the new order
-    // For example:
-    // await updateFormOrder(newForms.map(form => ({ formId: form.formId, order: form.order })));
-  };
-
   return (
     <div className="space-y-6">
       <Typography variant="h1">{t('forms.title')}</Typography>
@@ -79,7 +68,6 @@ export default function Forms() {
         isLoading={isLoading}
         error={error}
         onFormClick={formId => navigate(`/forms/${formId}`)}
-        onOrderChange={handleOrderChange}
       />
     </div>
   );
