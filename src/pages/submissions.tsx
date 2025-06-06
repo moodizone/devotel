@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { Typography } from '../components/ui/typography';
 import { Table } from '../components/ui/table';
+import { Button } from '../components/ui/button';
 import { fetchSubmissions, type TableData } from '../services/submissions';
 
 export default function Submissions() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [columns, setColumns] = React.useState<
     Array<{ key: string; label: string; visible: boolean }>
   >([]);
@@ -42,7 +45,27 @@ export default function Submissions() {
 
   return (
     <div className="space-y-6">
-      <Typography variant="h1">{t('submissions.title')}</Typography>
+      <div className="flex flex-wrap gap-3 items-center justify-between">
+        <Typography variant="h1">{t('submissions.title')}</Typography>
+        <Button onClick={() => navigate('/forms')}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="mr-2"
+          >
+            <path d="M5 12h14" />
+            <path d="M12 5v14" />
+          </svg>
+          {t('submissions.new')}
+        </Button>
+      </div>
       <Table
         columns={columns}
         data={tableData.data}
