@@ -16,21 +16,21 @@ export default function Submissions() {
     error,
   } = useQuery<TableData>({
     queryKey: ['submissions'],
-    async queryFn() {
-      const data = await fetchSubmissions();
-
-      if (data) {
-        setColumns(
-          data.columns.map((col, index) => ({
-            key: col,
-            label: col,
-            visible: index < 3,
-          }))
-        );
-      }
-      return data;
-    },
+    queryFn: fetchSubmissions,
+    staleTime: 5 * 60 * 1000, // Consider data fresh for 5 minutes
   });
+
+  React.useEffect(() => {
+    if (tableData.columns.length > 0) {
+      setColumns(
+        tableData.columns.map((col, index) => ({
+          key: col,
+          label: col,
+          visible: index < 3,
+        }))
+      );
+    }
+  }, [tableData.columns]);
 
   const handleToggleColumn = (columnKey: string) => {
     setColumns(prev =>
