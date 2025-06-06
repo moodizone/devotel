@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './index.css';
 import Layout from './Layout';
@@ -12,8 +13,8 @@ export default function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/" element={<Navigate to="/submission" replace />} />
-          <Route path="/submission" element={<Submissions />} />
+          <Route path="/" element={<Navigate to="/submissions" replace />} />
+          <Route path="/submissions" element={<Submissions />} />
           <Route path="/submission/:id" element={<SubmissionDetails />} />
           <Route path="/forms" element={<Forms />} />
           <Route path="/forms/:id" element={<FormDetails />} />
