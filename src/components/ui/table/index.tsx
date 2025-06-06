@@ -19,6 +19,7 @@ export function Table({
   searchableColumns = [],
   andFilterColumns = [],
   orFilterColumns = [],
+  onRowClick,
 }: TableProps) {
   const { t } = useTranslation();
   const [sortColumn, setSortColumn] = React.useState<string>();
@@ -228,6 +229,7 @@ export function Table({
                   uniqueKey={uniqueKey}
                   hasActiveFilters={hasActiveFilters}
                   onClearFilters={handleClearFilters}
+                  onRowClick={onRowClick}
                 />
               </table>
             </div>

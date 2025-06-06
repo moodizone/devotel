@@ -21,4 +21,5 @@ export interface TableProps {
   searchableColumns?: string[];
   andFilterColumns?: FilterConfig[];
   orFilterColumns?: FilterConfig[];
-} 
+  onRowClick?: (row: Record<string, TableData['data']>) => void;
+}
