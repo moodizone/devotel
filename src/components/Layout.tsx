@@ -2,9 +2,9 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from './ui/button';
 import { Typography } from './ui/typography';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout() {
   const { t, i18n } = useTranslation();
   const [dark, setDark] = React.useState(false);
   const [rtl, setRtl] = React.useState(i18n.language === 'fa');
@@ -214,7 +214,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </header>
 
         <main className="flex-1 p-4 bg-zinc-50 dark:bg-zinc-900 transition-colors duration-300">
-          {children}
+          <Outlet />
         </main>
       </div>
     </div>

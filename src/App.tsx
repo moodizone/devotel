@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
+import { QueryProvider } from './providers/query-provider';
 import Layout from './components/Layout';
 import Submissions from './pages/submissions';
 import SubmissionDetails from './pages/submission-details';
@@ -10,17 +11,19 @@ import NotFound from './pages/not-found';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Layout>
+    <QueryProvider>
+      <Router>
         <Routes>
-          <Route path="/" element={<Navigate to="/submissions" replace />} />
-          <Route path="/submissions" element={<Submissions />} />
-          <Route path="/submission/:id" element={<SubmissionDetails />} />
-          <Route path="/forms" element={<Forms />} />
-          <Route path="/forms/:id" element={<FormDetails />} />
-          <Route path="*" element={<NotFound />} />
+          <Route element={<Layout />}>
+            <Route index element={<Submissions />} />
+            <Route path="submissions" element={<Submissions />} />
+            <Route path="submissions/:id" element={<SubmissionDetails />} />
+            <Route path="forms" element={<Forms />} />
+            <Route path="forms/:id" element={<FormDetails />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
         </Routes>
-      </Layout>
-    </BrowserRouter>
+      </Router>
+    </QueryProvider>
   );
 }
