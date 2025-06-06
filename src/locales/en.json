@@ -26,7 +26,14 @@
   },
   "submissions": {
     "title": "Submissions",
-    "description": "View and manage form submissions"
+    "description": "View and manage form submissions",
+    "details": {
+      "title": "Submission Details",
+      "notFound": "The submission you're looking for doesn't exist.",
+      "backToList": "Back to List",
+      "backToSubmissions": "Back to Submissions",
+      "error": "An error occurred while loading the submission"
+    }
   },
   "forms": {
     "title": "Forms",

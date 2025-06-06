@@ -4,10 +4,12 @@ import { Typography } from '../components/ui/typography';
 import { fetchSubmissions } from '../services/submissions';
 import { Button } from '../components/ui/button';
 import { Skeleton } from '../components/ui/skeleton';
+import { useTranslation } from 'react-i18next';
 
 export default function SubmissionDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const {
     data: submissions,
@@ -16,6 +18,7 @@ export default function SubmissionDetails() {
   } = useQuery({
     queryKey: ['submissions'],
     queryFn: fetchSubmissions,
+    staleTime: 5 * 60 * 1000, // Consider data fresh for 5 minutes
   });
 
   const submission = submissions?.data.find(sub => sub.id === id);
@@ -26,9 +29,9 @@ export default function SubmissionDetails() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <Typography variant="h1">Submission Details</Typography>
+        <Typography variant="h1">{t('submissions.details.title')}</Typography>
         <Button variant="outline" onClick={() => navigate('/submissions')}>
-          Back to List
+          {t('submissions.details.backToList')}
         </Button>
       </div>
 
@@ -42,20 +45,21 @@ export default function SubmissionDetails() {
           ))}
         </div>
       ) : error ? (
-        <>
-          <div className="space-y-4">
-            <Typography variant="p" className="text-red-500">
-              {error instanceof Error
-                ? error.message
-                : 'An error occurred while loading the submission'}
-            </Typography>
-            <Button onClick={() => navigate('/submissions')}>Back to Submissions</Button>
-          </div>
-          <div className="space-y-4">
-            <Typography variant="p">The submission you're looking for doesn't exist.</Typography>
-            <Button onClick={() => navigate('/submissions')}>Back to Submissions</Button>
-          </div>
-        </>
+        <div className="space-y-4">
+          <Typography variant="p" className="text-red-500">
+            {error instanceof Error ? error.message : t('submissions.details.error')}
+          </Typography>
+          <Button onClick={() => navigate('/submissions')}>
+            {t('submissions.details.backToSubmissions')}
+          </Button>
+        </div>
+      ) : !submission ? (
+        <div className="space-y-4">
+          <Typography variant="p">{t('submissions.details.notFound')}</Typography>
+          <Button onClick={() => navigate('/submissions')}>
+            {t('submissions.details.backToSubmissions')}
+          </Button>
+        </div>
       ) : (
         <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 p-6">
           <div className="space-y-4">

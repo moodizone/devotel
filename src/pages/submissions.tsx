@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 
 import { Typography } from '../components/ui/typography';
 import { Table } from '../components/ui/table';
 import { fetchSubmissions, type TableData } from '../services/submissions';
 
 export default function Submissions() {
+  const { t } = useTranslation();
   const [columns, setColumns] = React.useState<
     Array<{ key: string; label: string; visible: boolean }>
   >([]);
@@ -40,7 +42,7 @@ export default function Submissions() {
 
   return (
     <div className="space-y-6">
-      <Typography variant="h1">Submissions</Typography>
+      <Typography variant="h1">{t('submissions.title')}</Typography>
       <Table
         columns={columns}
         data={tableData.data}

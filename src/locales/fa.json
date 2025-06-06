@@ -26,7 +26,14 @@
   },
   "submissions": {
     "title": "ثبت‌ها",
-    "description": "مشاهده و مدیریت ثبت‌های فرم"
+    "description": "مشاهده و مدیریت ثبت‌های فرم",
+    "details": {
+      "title": "جزئیات ثبت",
+      "notFound": "ثبت مورد نظر یافت نشد.",
+      "backToList": "بازگشت به لیست",
+      "backToSubmissions": "بازگشت به ثبت‌ها",
+      "error": "خطا در بارگذاری اطلاعات ثبت"
+    }
   },
   "forms": {
     "title": "فرم‌ها",
