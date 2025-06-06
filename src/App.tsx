@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './index.css';
-import Layout from './Layout';
+import Layout from './components/Layout';
 import Submissions from './pages/submissions';
 import SubmissionDetails from './pages/submission-details';
 import Forms from './pages/forms';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from './components/ui/button';
-import { Typography } from './components/ui/typography';
+import { Button } from './ui/button';
+import { Typography } from './ui/typography';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -40,7 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           transition-transform duration-200 ease-in-out
           md:static md:translate-x-0
           ${sidebarOpen ? 'translate-x-0' : rtl ? 'translate-x-full' : '-translate-x-full'}
-          md:w-64 md:block
+          md:w-64
           flex flex-col
         `}
       >
@@ -124,7 +124,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </Link>
         </nav>
 
-        <div className="mt-auto border-t border-zinc-200 dark:border-zinc-700 p-4">
+        <div className="flex mt-auto border-t border-zinc-200 dark:border-zinc-700 p-4 items-end">
           <div className="flex items-center justify-between">
             <Button
               variant="ghost"
@@ -194,12 +194,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="flex-1 flex flex-col min-h-screen transition-all duration-200">
         {/* Header */}
         <header className="flex items-center justify-between p-4 bg-white dark:bg-zinc-800 shadow md:hidden">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleDrawer}
-            aria-label="Open sidebar"
-          >
+          <Button variant="ghost" size="icon" onClick={toggleDrawer} aria-label="Open sidebar">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
