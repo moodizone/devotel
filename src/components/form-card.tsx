@@ -1,6 +1,5 @@
-import * as React from 'react';
 import { Typography } from './ui/typography';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import { useTranslation } from 'react-i18next';
 
 interface FormCardProps {
@@ -8,32 +7,21 @@ interface FormCardProps {
   title: string;
   totalFields: number;
   requiredFields: number;
-  order: number;
   onClick?: () => void;
 }
 
-export function FormCard({
-  formId,
-  title,
-  totalFields,
-  requiredFields,
-  order,
-  onClick,
-}: FormCardProps) {
+export function FormCard({ formId, title, totalFields, requiredFields, onClick }: FormCardProps) {
   const { t } = useTranslation();
 
   return (
     <Card
-      className={`cursor-pointer transition-all hover:shadow-lg ${
-        onClick ? 'hover:bg-zinc-50 dark:hover:bg-zinc-900' : ''
+      className={`transition-all hover:shadow-lg ${
+        onClick ? 'hover:bg-zinc-50 dark:hover:bg-zinc-900 cursor-pointer' : ''
       }`}
       onClick={onClick}
     >
       <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
-        <CardTitle className="text-xl font-medium ">{title}</CardTitle>
-        <Typography variant="small" className="text-zinc-500 dark:text-zinc-400">
-          #{order}
-        </Typography>
+        <CardTitle className="text-xl font-medium">{title}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex flex-col flex-wrap gap-4 pt-2 min-w-0">
@@ -57,11 +45,7 @@ export function FormCard({
             <Typography variant="small" className="text-zinc-500 dark:text-zinc-400">
               {t('forms.requiredFields')}
             </Typography>
-            <Typography
-              style={{ marginTop: 0 }}
-              variant="p"
-              className="font-medium truncate max-w-[80px] block"
-            >
+            <Typography style={{ marginTop: 0 }} variant="p" className="font-medium block">
               {requiredFields}
             </Typography>
           </div>
