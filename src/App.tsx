@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './index.css';
 import { QueryProvider } from './providers/query-provider';
 import Layout from './components/Layout';
@@ -15,7 +15,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route element={<Layout />}>
-            <Route index element={<Submissions />} />
+            <Route index element={<Navigate to="/submissions" replace />} />
             <Route path="submissions" element={<Submissions />} />
             <Route path="submissions/:id" element={<SubmissionDetails />} />
             <Route path="forms" element={<Forms />} />
