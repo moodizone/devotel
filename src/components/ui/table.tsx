@@ -17,16 +17,7 @@ interface TableProps<T> {
   data: T[];
   isLoading?: boolean;
   error?: string;
-  onSort?: (column: string, direction: 'asc' | 'desc') => void;
-  sortColumn?: string;
-  sortDirection?: 'asc' | 'desc';
   onToggleColumn?: (column: string) => void;
-  page?: number;
-  totalPages?: number;
-  onPageChange?: (page: number) => void;
-  itemsPerPage?: number;
-  onItemsPerPageChange?: (itemsPerPage: number) => void;
-  totalItems?: number;
 }
 
 export function Table<T extends Record<string, any>>({
@@ -34,19 +25,55 @@ export function Table<T extends Record<string, any>>({
   data,
   isLoading,
   error,
-  onSort,
-  sortColumn,
-  sortDirection,
   onToggleColumn,
-  page = 1,
-  totalPages = 1,
-  onPageChange,
-  itemsPerPage = 10,
-  onItemsPerPageChange,
-  totalItems = 0,
 }: TableProps<T>) {
   const { t } = useTranslation();
+  const [sortColumn, setSortColumn] = React.useState<string>();
+  const [sortDirection, setSortDirection] = React.useState<'asc' | 'desc'>('asc');
+  const [page, setPage] = React.useState(1);
+  const [itemsPerPage, setItemsPerPage] = React.useState(10);
   const visibleColumns = columns.filter(col => col.visible);
+
+  const handleSort = (column: string, direction: 'asc' | 'desc') => {
+    setSortColumn(column);
+    setSortDirection(direction);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleItemsPerPageChange = (newItemsPerPage: number) => {
+    setItemsPerPage(newItemsPerPage);
+    setPage(1); // Reset to first page when changing items per page
+  };
+
+  // Sort data
+  const sortedData = React.useMemo(() => {
+    if (!sortColumn) return data;
+
+    return [...data].sort((a, b) => {
+      const aValue = a[sortColumn];
+      const bValue = b[sortColumn];
+
+      if (typeof aValue === 'string' && typeof bValue === 'string') {
+        return sortDirection === 'asc'
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue);
+      }
+
+      return sortDirection === 'asc'
+        ? (aValue as number) - (bValue as number)
+        : (bValue as number) - (aValue as number);
+    });
+  }, [data, sortColumn, sortDirection]);
+
+  // Paginate data
+  const totalItems = sortedData.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedData = sortedData.slice(startIndex, endIndex);
 
   if (isLoading) {
     return <TableSkeleton columns={columns} />;
@@ -81,7 +108,7 @@ export function Table<T extends Record<string, any>>({
           </Typography>
           <select
             value={itemsPerPage}
-            onChange={e => onItemsPerPageChange?.(Number(e.target.value))}
+            onChange={e => handleItemsPerPageChange(Number(e.target.value))}
             className="rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-2 py-1 text-sm text-zinc-900 dark:text-zinc-50"
           >
             {[10, 20, 30, 50].map(size => (
@@ -90,8 +117,13 @@ export function Table<T extends Record<string, any>>({
               </option>
             ))}
           </select>
+          <Typography variant="small" className="text-zinc-500 dark:text-zinc-400">
+            {t('table.showing')} {totalItems === 0 ? 0 : startIndex + 1} {t('table.to')}{' '}
+            {Math.min(endIndex, totalItems)} {t('table.of')} {totalItems} {t('table.results')}
+          </Typography>
         </div>
-        <div className="relative z-30">
+
+        <div className="relative z-50">
           <Menu
             trigger={
               <Button variant="outline" size="sm">
@@ -141,7 +173,7 @@ export function Table<T extends Record<string, any>>({
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() =>
-                              onSort?.(
+                              handleSort(
                                 column.key,
                                 sortColumn === column.key && sortDirection === 'asc'
                                   ? 'desc'
@@ -149,12 +181,26 @@ export function Table<T extends Record<string, any>>({
                               )
                             }
                             className="flex items-center gap-1 hover:text-zinc-900 dark:hover:text-zinc-50"
+                            title={sortColumn === column.key 
+                              ? t('table.sortingBy', { column: column.label, direction: sortDirection === 'asc' ? t('table.ascending') : t('table.descending') })
+                              : t('table.sortBy', { column: column.label })}
                           >
                             {column.label}
                             {sortColumn === column.key && (
-                              <span className="text-zinc-400 dark:text-zinc-500">
-                                {sortDirection === 'asc' ? '↑' : '↓'}
-                              </span>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className={`transition-transform ${sortDirection === 'desc' ? 'rotate-180' : ''}`}
+                              >
+                                <path d="m6 9 6 6 6-6" />
+                              </svg>
                             )}
                           </button>
                         </div>
@@ -163,7 +209,7 @@ export function Table<T extends Record<string, any>>({
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
-                  {data.map((row, rowIndex) => (
+                  {paginatedData.map((row, rowIndex) => (
                     <tr
                       key={row.id || rowIndex}
                       className="hover:bg-zinc-50 dark:hover:bg-zinc-900"
@@ -188,7 +234,7 @@ export function Table<T extends Record<string, any>>({
       <Pagination
         page={page}
         totalPages={totalPages}
-        onPageChange={onPageChange || (() => {})}
+        onPageChange={handlePageChange}
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
       />
