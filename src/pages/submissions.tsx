@@ -69,13 +69,14 @@ export default function Submissions() {
       <Table
         columns={columns}
         data={tableData.data}
+        uniqueKey="id"
         isLoading={isLoading}
         error={error?.message}
         onToggleColumn={handleToggleColumn}
         searchableColumns={['Full Name']}
         andFilterColumns={[{ key: 'Gender', label: 'Gender' }]}
         orFilterColumns={[{ key: 'Insurance Type', label: 'Insurance Type' }]}
-        uniqueKey="id"
+        onRowClick={(row) => navigate(`/submissions/${row.id}`)}
       />
     </div>
   );
