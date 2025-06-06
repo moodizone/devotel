@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const { t, i18n } = useTranslation();
   const [dark, setDark] = React.useState(false);
-  const [rtl, setRtl] = React.useState(false);
+  const [rtl, setRtl] = React.useState(i18n.language === 'fa');
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
   // Update html classes for dark mode and direction
@@ -10,6 +12,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     document.documentElement.classList.toggle('dark', dark);
     document.documentElement.dir = rtl ? 'rtl' : 'ltr';
   }, [dark, rtl]);
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'en' ? 'fa' : 'en';
+    i18n.changeLanguage(newLang);
+    setRtl(newLang === 'fa');
+  };
 
   return (
     <div className="min-h-screen flex bg-zinc-100 dark:bg-zinc-900 transition-colors duration-300">
@@ -28,10 +36,34 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <button
               className="p-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-600 cursor-pointer rounded"
               onClick={() => setDark(d => !d)}
-              aria-label="Toggle theme"
+              aria-label={t('theme.' + (dark ? 'light' : 'dark'))}
             >
               {dark ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <circle cx="12" cy="12" r="5" />
                   <line x1="12" y1="1" x2="12" y2="3" />
                   <line x1="12" y1="21" x2="12" y2="23" />
@@ -42,18 +74,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
                   <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
                 </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                </svg>
               )}
             </button>
             <button
               className="p-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-600 cursor-pointer rounded"
-              onClick={() => setRtl(r => !r)}
-              aria-label="Toggle direction"
+              onClick={toggleLanguage}
+              aria-label={t('language.' + (i18n.language === 'en' ? 'en' : 'fa'))}
             >
-              {rtl ? 'فا' : 'EN'}
+              {i18n.language === 'en' ? 'EN' : 'فا'}
             </button>
           </div>
           <button
@@ -69,13 +97,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             href="#"
             className="block px-2 py-1 rounded hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 cursor-pointer"
           >
-            Dashboard
+            {t('sidebar.dashboard')}
           </a>
           <a
             href="#"
             className="block px-2 py-1 rounded hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 cursor-pointer"
           >
-            Settings
+            {t('sidebar.settings')}
           </a>
         </nav>
       </aside>

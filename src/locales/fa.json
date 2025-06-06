@@ -1,0 +1,14 @@
+{
+  "sidebar": {
+    "dashboard": "داشبورد",
+    "settings": "تنظیمات"
+  },
+  "theme": {
+    "light": "روشن",
+    "dark": "تیره"
+  },
+  "language": {
+    "en": "انگلیسی",
+    "fa": "فارسی"
+  }
+} 
