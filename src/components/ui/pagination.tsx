@@ -20,6 +20,38 @@ export function Pagination({
 }: PaginationProps) {
   const { t } = useTranslation();
 
+  const getPageNumbers = () => {
+    const pages: (number | string)[] = [];
+    
+    if (totalPages <= 5) {
+      // If total pages is 5 or less, show all pages
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    // Always show first page
+    pages.push(1);
+
+    if (page > 3) {
+      pages.push('...');
+    }
+
+    // Show pages around current page
+    for (let i = Math.max(2, page - 1); i <= Math.min(page + 1, totalPages - 1); i++) {
+      pages.push(i);
+    }
+
+    if (page < totalPages - 2) {
+      pages.push('...');
+    }
+
+    // Always show last page
+    if (totalPages > 1) {
+      pages.push(totalPages);
+    }
+
+    return pages;
+  };
+
   return (
     <div className="flex items-center justify-between flex-wrap gap-3">
       <Typography variant="small" className="text-zinc-500 dark:text-zinc-400">
@@ -36,18 +68,24 @@ export function Pagination({
         >
           {t('pagination.previous')}
         </Button>
-
+        
         {/* Show all page numbers on desktop */}
         <div className="hidden md:flex items-center gap-2">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map(pageNum => (
-            <Button
-              key={pageNum}
-              variant={pageNum === page ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => onPageChange(pageNum)}
-            >
-              {pageNum}
-            </Button>
+          {getPageNumbers().map((pageNum, index) => (
+            pageNum === '...' ? (
+              <span key={`ellipsis-${index}`} className="px-2 text-zinc-500 dark:text-zinc-400">
+                ...
+              </span>
+            ) : (
+              <Button
+                key={pageNum}
+                variant={pageNum === page ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => onPageChange(pageNum as number)}
+              >
+                {pageNum}
+              </Button>
+            )
           ))}
         </div>
 
