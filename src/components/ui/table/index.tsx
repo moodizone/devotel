@@ -28,6 +28,46 @@ export function Table({
   const [andFilters, setAndFilters] = React.useState<Record<string, string>>({});
   const [orFilters, setOrFilters] = React.useState<Record<string, string[]>>({});
 
+  // Get visible searchable columns
+  const visibleSearchableColumns = React.useMemo(
+    () => searchableColumns.filter(col => columns.find(c => c.key === col)?.visible),
+    [searchableColumns, columns]
+  );
+
+  // Get visible filter columns
+  const visibleAndFilterColumns = React.useMemo(
+    () => andFilterColumns.filter(filter => columns.find(c => c.key === filter.key)?.visible),
+    [andFilterColumns, columns]
+  );
+
+  const visibleOrFilterColumns = React.useMemo(
+    () => orFilterColumns.filter(filter => columns.find(c => c.key === filter.key)?.visible),
+    [orFilterColumns, columns]
+  );
+
+  // Generate filter options dynamically from data
+  const filterOptions = React.useMemo(() => {
+    const options: Record<string, string[]> = {};
+
+    // Generate options for AND filters
+    visibleAndFilterColumns.forEach(filter => {
+      const uniqueValues = Array.from(
+        new Set(data.map(row => row[filter.key]?.toString()).filter(Boolean))
+      ).sort();
+      options[filter.key] = uniqueValues;
+    });
+
+    // Generate options for OR filters
+    visibleOrFilterColumns.forEach(filter => {
+      const uniqueValues = Array.from(
+        new Set(data.map(row => row[filter.key]?.toString()).filter(Boolean))
+      ).sort();
+      options[filter.key] = uniqueValues;
+    });
+
+    return options;
+  }, [data, visibleAndFilterColumns, visibleOrFilterColumns]);
+
   //================================
   // Handlers
   //================================
@@ -77,7 +117,7 @@ export function Table({
   const filteredData = React.useMemo(() => {
     return data.filter(row => {
       if (searchQuery) {
-        const searchMatch = searchableColumns.some(column => {
+        const searchMatch = visibleSearchableColumns.some(column => {
           const value = row[column]?.toString().toLowerCase() || '';
           return value.includes(searchQuery.toLowerCase());
         });
@@ -98,7 +138,7 @@ export function Table({
 
       return true;
     });
-  }, [data, searchQuery, andFilters, orFilters, searchableColumns]);
+  }, [data, searchQuery, andFilters, orFilters, visibleSearchableColumns]);
 
   const hasActiveFilters = React.useMemo(
     () =>
@@ -151,17 +191,16 @@ export function Table({
     <div className="space-y-4 w-full">
       <div className="flex flex-wrap gap-4">
         <TableFilters
-          searchableColumns={searchableColumns}
-          andFilterColumns={andFilterColumns}
-          orFilterColumns={orFilterColumns}
+          searchableColumns={visibleSearchableColumns}
+          andFilterColumns={visibleAndFilterColumns}
+          orFilterColumns={visibleOrFilterColumns}
+          filterOptions={filterOptions}
           searchQuery={searchQuery}
           andFilters={andFilters}
           orFilters={orFilters}
           onSearchChange={handleSearchChange}
           onAndFilterChange={handleAndFilterChange}
           onOrFilterChange={handleOrFilterChange}
-          hasActiveFilters={hasActiveFilters}
-          onClearFilters={handleClearFilters}
         />
         <TableControls
           itemsPerPage={itemsPerPage}

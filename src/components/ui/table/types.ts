@@ -9,7 +9,6 @@ export interface Column {
 export interface FilterConfig {
   key: string;
   label: string;
-  options: string[];
 }
 
 export interface TableProps {
