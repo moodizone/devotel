@@ -51,7 +51,10 @@
     "description": "ایجاد و مدیریت فرم‌ها",
     "error": "خطا در بارگذاری فرم‌ها",
     "noData": "هیچ فرمی یافت نشد",
-    "create": "ایجاد فرم"
+    "create": "ایجاد فرم",
+    "formId": "شناسه فرم",
+    "totalFields": "تعداد فیلدها",
+    "requiredFields": "فیلدهای ضروری"
   },
   "formDetails": {
     "title": "جزئیات فرم",

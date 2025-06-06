@@ -51,7 +51,10 @@
     "description": "Create and manage forms",
     "error": "An error occurred while loading forms",
     "noData": "No forms found",
-    "create": "Create Form"
+    "create": "Create Form",
+    "formId": "Form ID",
+    "totalFields": "Total Fields",
+    "requiredFields": "Required Fields"
   },
   "formDetails": {
     "title": "Form Details",
