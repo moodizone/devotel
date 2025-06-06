@@ -1,14 +1,45 @@
 {
+  "app": {
+    "name": "Devotel"
+  },
   "sidebar": {
-    "dashboard": "Dashboard",
-    "settings": "Settings"
+    "submissions": "Submissions",
+    "forms": "Forms"
   },
-  "theme": {
-    "light": "Light",
-    "dark": "Dark"
+  "table": {
+    "itemsPerPage": "Items per page",
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "results": "results",
+    "visibility": "Visibility",
+    "noRecords": "No records found",
+    "error": "An error occurred while loading the data"
   },
-  "language": {
-    "en": "English",
-    "fa": "Persian"
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page",
+    "of": "of"
+  },
+  "submissions": {
+    "title": "Submissions",
+    "loading": "Loading submissions...",
+    "error": "Error loading submissions"
+  },
+  "forms": {
+    "title": "Forms",
+    "loading": "Loading forms...",
+    "error": "Error loading forms"
+  },
+  "formDetails": {
+    "title": "Form Details",
+    "loading": "Loading form details...",
+    "error": "Error loading form details"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "message": "The page you are looking for does not exist.",
+    "backHome": "Back to Home"
   }
 } 
