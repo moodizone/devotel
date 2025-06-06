@@ -36,6 +36,8 @@
     "title": "Submissions",
     "description": "View and manage form submissions",
     "new": "New Submission",
+    "error": "An error occurred while loading submissions",
+    "noData": "No submissions found",
     "details": {
       "title": "Submission Details",
       "notFound": "The submission you're looking for doesn't exist.",
@@ -46,7 +48,10 @@
   },
   "forms": {
     "title": "Forms",
-    "description": "Create and manage forms"
+    "description": "Create and manage forms",
+    "error": "An error occurred while loading forms",
+    "noData": "No forms found",
+    "create": "Create Form"
   },
   "formDetails": {
     "title": "Form Details",

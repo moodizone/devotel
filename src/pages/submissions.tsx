@@ -2,11 +2,12 @@ import * as React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-
 import { Typography } from '../components/ui/typography';
 import { Button } from '../components/ui/button';
 import { fetchSubmissions, type TableData } from '../services/submissions';
 import { Table } from '../components/ui/table/index';
+import { ErrorMessage } from '../components/ui/error-message';
+import { NoData } from '../components/ui/no-data';
 
 export default function Submissions() {
   const { t } = useTranslation();
@@ -43,6 +44,36 @@ export default function Submissions() {
     );
   };
 
+  const renderContent = () => {
+    if (error) {
+      return <ErrorMessage message={t('submissions.error')} />;
+    }
+
+    if (!isLoading && tableData.data.length === 0) {
+      return (
+        <NoData 
+          message={t('submissions.noData')} 
+          actionLabel={t('submissions.new')}
+          onAction={() => navigate('/forms')}
+        />
+      );
+    }
+
+    return (
+      <Table
+        columns={columns}
+        data={tableData.data}
+        uniqueKey="id"
+        isLoading={isLoading}
+        onToggleColumn={handleToggleColumn}
+        searchableColumns={['Full Name']}
+        andFilterColumns={[{ key: 'Gender', label: 'Gender' }]}
+        orFilterColumns={[{ key: 'Insurance Type', label: 'Insurance Type' }]}
+        onRowClick={(row) => navigate(`/submissions/${row.id}`)}
+      />
+    );
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap gap-3 items-center justify-between">
@@ -66,18 +97,7 @@ export default function Submissions() {
           {t('submissions.new')}
         </Button>
       </div>
-      <Table
-        columns={columns}
-        data={tableData.data}
-        uniqueKey="id"
-        isLoading={isLoading}
-        error={error?.message}
-        onToggleColumn={handleToggleColumn}
-        searchableColumns={['Full Name']}
-        andFilterColumns={[{ key: 'Gender', label: 'Gender' }]}
-        orFilterColumns={[{ key: 'Insurance Type', label: 'Insurance Type' }]}
-        onRowClick={(row) => navigate(`/submissions/${row.id}`)}
-      />
+      {renderContent()}
     </div>
   );
 }
