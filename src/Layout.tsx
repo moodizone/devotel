@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Button } from './components/ui/button';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { t, i18n } = useTranslation();
@@ -33,8 +34,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         <div className="flex items-center justify-between p-4 border-b border-zinc-200 dark:border-zinc-700">
           <div className="flex gap-2">
-            <button
-              className="p-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-600 cursor-pointer rounded"
+            <Button
+              variant="outline"
+              size="icon"
               onClick={() => setDark(d => !d)}
               aria-label={t('theme.' + (dark ? 'light' : 'dark'))}
             >
@@ -75,22 +77,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
                 </svg>
               )}
-            </button>
-            <button
-              className="p-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-600 cursor-pointer rounded"
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
               onClick={toggleLanguage}
               aria-label={t('language.' + (i18n.language === 'en' ? 'en' : 'fa'))}
             >
               {i18n.language === 'en' ? 'EN' : 'فا'}
-            </button>
+            </Button>
           </div>
-          <button
-            className="md:hidden text-zinc-600 dark:text-zinc-300 hover:text-zinc-800 dark:hover:text-zinc-100 cursor-pointer rounded"
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
             onClick={() => setSidebarOpen(false)}
             aria-label="Close sidebar"
           >
             ✕
-          </button>
+          </Button>
         </div>
         <nav className="p-4 space-y-2">
           <a
@@ -110,7 +115,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Overlay for mobile */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-30 z-20 md:hidden"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-20 md:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -118,13 +123,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="flex-1 flex flex-col min-h-screen transition-all duration-200">
         {/* Header */}
         <header className="flex items-center justify-between p-4 bg-white dark:bg-zinc-800 shadow md:hidden">
-          <button
-            className="text-zinc-600 dark:text-zinc-300 hover:text-zinc-800 dark:hover:text-zinc-100 cursor-pointer rounded"
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={() => setSidebarOpen(true)}
             aria-label="Open sidebar"
           >
             ☰
-          </button>
+          </Button>
         </header>
         <main className="flex-1 p-4 bg-zinc-50 dark:bg-zinc-900 transition-colors duration-300">
           {children}
