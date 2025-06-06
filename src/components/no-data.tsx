@@ -1,5 +1,5 @@
-import { Typography } from './typography';
-import { Button } from './button';
+import { Button } from './ui/button';
+import { Typography } from './ui/typography';
 
 interface NoDataProps {
   message: string;
@@ -20,4 +20,4 @@ export function NoData({ message, actionLabel, onAction }: NoDataProps) {
       )}
     </div>
   );
-} 
+}

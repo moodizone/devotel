@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '../typography';
-import { Pagination } from '../pagination';
+import { Pagination } from '../../pagination';
 import { TableHeader } from './TableHeader';
 import { TableFilters } from './TableFilters';
 import { TableControls } from './TableControls';

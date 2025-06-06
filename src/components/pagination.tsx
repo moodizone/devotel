@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from './button';
-import { Typography } from './typography';
+import { Typography } from './ui/typography';
+import { Button } from './ui/button';
 
 interface PaginationProps {
   page: number;

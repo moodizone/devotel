@@ -1,4 +1,4 @@
-import { Typography } from './typography';
+import { Typography } from './ui/typography';
 
 interface ErrorMessageProps {
   message: string;
@@ -10,4 +10,4 @@ export function ErrorMessage({ message }: ErrorMessageProps) {
       <Typography variant="p">{message}</Typography>
     </div>
   );
-} 
+}

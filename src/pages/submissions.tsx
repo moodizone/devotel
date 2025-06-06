@@ -6,8 +6,8 @@ import { Typography } from '../components/ui/typography';
 import { Button } from '../components/ui/button';
 import { fetchSubmissions, type TableData } from '../services/submissions';
 import { Table } from '../components/ui/table/index';
-import { ErrorMessage } from '../components/ui/error-message';
-import { NoData } from '../components/ui/no-data';
+import { ErrorMessage } from '../components/error-message';
+import { NoData } from '../components/no-data';
 
 export default function Submissions() {
   const { t } = useTranslation();
@@ -51,8 +51,8 @@ export default function Submissions() {
 
     if (!isLoading && tableData.data.length === 0) {
       return (
-        <NoData 
-          message={t('submissions.noData')} 
+        <NoData
+          message={t('submissions.noData')}
           actionLabel={t('submissions.new')}
           onAction={() => navigate('/forms')}
         />
@@ -69,7 +69,7 @@ export default function Submissions() {
         searchableColumns={['Full Name']}
         andFilterColumns={[{ key: 'Gender', label: 'Gender' }]}
         orFilterColumns={[{ key: 'Insurance Type', label: 'Insurance Type' }]}
-        onRowClick={(row) => navigate(`/submissions/${row.id}`)}
+        onRowClick={row => navigate(`/submissions/${row.id}`)}
       />
     );
   };
