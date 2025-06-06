@@ -15,10 +15,18 @@
     "visibility": "نمایش ستون‌ها",
     "error": "خطا در بارگذاری اطلاعات",
     "noRecords": "هیچ رکوردی یافت نشد",
+    "noResults": "هیچ رکوردی با فیلترهای فعلی یافت نشد",
+    "clearFilters": "پاک کردن فیلترها",
     "sortBy": "مرتب‌سازی بر اساس {{column}}",
     "sortingBy": "مرتب‌سازی بر اساس {{column}} به صورت {{direction}}",
     "ascending": "صعودی",
-    "descending": "نزولی"
+    "descending": "نزولی",
+    "search": "جستجو...",
+    "filter": {
+      "all": "همه",
+      "select": "انتخاب {{field}}",
+      "selected": "{{count}} مورد انتخاب شده"
+    }
   },
   "pagination": {
     "previous": "قبلی",

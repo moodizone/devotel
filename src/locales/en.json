@@ -15,10 +15,18 @@
     "visibility": "Visibility",
     "error": "An error occurred while loading the data",
     "noRecords": "No records found",
+    "noResults": "No records found with your current filters",
+    "clearFilters": "Clear Filters",
     "sortBy": "Sort by {{column}}",
     "sortingBy": "Sorting by {{column}} {{direction}}",
     "ascending": "ascending",
-    "descending": "descending"
+    "descending": "descending",
+    "search": "Search...",
+    "filter": {
+      "all": "All",
+      "select": "Select {{field}}",
+      "selected": "{{count}} selected"
+    }
   },
   "pagination": {
     "previous": "Previous",
