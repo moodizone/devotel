@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { Typography } from '../components/ui/typography';
-import { Table } from '../components/ui/table';
 import { Button } from '../components/ui/button';
 import { fetchSubmissions, type TableData } from '../services/submissions';
+import { Table } from '../components/ui/table/index';
 
 export default function Submissions() {
   const { t } = useTranslation();
@@ -72,6 +72,9 @@ export default function Submissions() {
         isLoading={isLoading}
         error={error?.message}
         onToggleColumn={handleToggleColumn}
+        searchableColumns={['Full Name']}
+        andFilterColumns={[{ key: 'Gender', label: 'Gender' }]}
+        orFilterColumns={[{ key: 'Insurance Type', label: 'Insurance Type' }]}
       />
     </div>
   );
