@@ -30,13 +30,26 @@ export function Menu({ trigger, children, align = 'right' }: MenuProps) {
 
       {isOpen && (
         <div
-          className={`absolute ${align}-0 mt-2 w-56 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-lg z-10`}
-        >
-          <div className="p-2">
-            {children}
-          </div>
-        </div>
+          className="fixed inset-0 z-30"
+          onClick={() => setIsOpen(false)}
+        />
       )}
+      <div className="relative">
+        {isOpen && (
+          <div
+            className={`
+              absolute ${align === 'right' ? 'right-0' : 'left-0'} top-full mt-1
+              w-56 rounded-md border border-zinc-200 dark:border-zinc-800
+              bg-white dark:bg-zinc-900 shadow-lg
+              z-40
+            `}
+          >
+            <div className="p-2">
+              {children}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 } 
