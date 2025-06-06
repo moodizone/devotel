@@ -51,7 +51,7 @@ export default function Layout() {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="md:hidden text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50"
             onClick={toggleDrawer}
             aria-label="Close sidebar"
           >
@@ -194,7 +194,7 @@ export default function Layout() {
       <div className="flex-1 flex flex-col min-h-screen transition-all duration-200">
         {/* Header */}
         <header className="flex items-center justify-between p-4 bg-white dark:bg-zinc-800 shadow md:hidden">
-          <Button variant="ghost" size="icon" onClick={toggleDrawer} aria-label="Open sidebar">
+          <Button variant="ghost" size="icon" onClick={toggleDrawer} aria-label="Open sidebar" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
