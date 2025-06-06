@@ -81,10 +81,9 @@ export function Table<T extends Record<string, any>>({
 
   if (error) {
     return (
-      <div className="rounded-lg border border-red-200 dark:border-red-800 p-4 text-center">
-        <Typography variant="p" className="text-red-600 dark:text-red-400">
-          {t('table.error')}
-        </Typography>
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 p-4 text-center">
+        {' '}
+        <Typography variant="p">{t('table.error')}</Typography>
       </div>
     );
   }
