@@ -28,7 +28,7 @@ export default function SubmissionDetails() {
   //================================
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap gap-3 items-center justify-between">
         <Typography variant="h1">{t('submissions.details.title')}</Typography>
         <Button variant="outline" onClick={() => navigate('/submissions')}>
           {t('submissions.details.backToList')}
