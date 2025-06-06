@@ -1,13 +1,25 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './index.css';
 import Layout from './Layout';
+import Submissions from './pages/submissions';
+import SubmissionDetails from './pages/submission-details';
+import Forms from './pages/forms';
+import FormDetails from './pages/form-details';
+import NotFound from './pages/not-found';
 
 export default function App() {
   return (
-    <Layout>
-      <div className="text-gray-900 dark:text-gray-100">
-        <h1 className="text-3xl font-bold mb-4">Welcome to the App Layout</h1>
-        <p>This is the main content area. Try toggling the theme and direction!</p>
-      </div>
-    </Layout>
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Navigate to="/submission" replace />} />
+          <Route path="/submission" element={<Submissions />} />
+          <Route path="/submission/:id" element={<SubmissionDetails />} />
+          <Route path="/forms" element={<Forms />} />
+          <Route path="/forms/:id" element={<FormDetails />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 }
