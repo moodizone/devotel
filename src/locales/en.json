@@ -58,7 +58,17 @@
   },
   "formDetails": {
     "title": "Form Details",
-    "description": "View and edit form details"
+    "description": "View and edit form details",
+    "error": "An error occurred while loading the form",
+    "notFound": "Form not found",
+    "backToForms": "Back to Forms",
+    "submit": "Submit Form",
+    "validation": {
+      "required": "{{field}} is required",
+      "min": "{{field}} must be at least {{min}}",
+      "max": "{{field}} must be at most {{max}}",
+      "pattern": "{{field}} format is invalid"
+    }
   },
   "notFound": {
     "title": "Page Not Found",

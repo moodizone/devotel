@@ -58,7 +58,17 @@
   },
   "formDetails": {
     "title": "جزئیات فرم",
-    "description": "مشاهده و ویرایش جزئیات فرم"
+    "description": "مشاهده و ویرایش جزئیات فرم",
+    "error": "خطا در بارگذاری فرم",
+    "notFound": "فرم یافت نشد",
+    "backToForms": "بازگشت به فرم‌ها",
+    "submit": "ثبت فرم",
+    "validation": {
+      "required": "{{field}} الزامی است",
+      "min": "{{field}} باید حداقل {{min}} باشد",
+      "max": "{{field}} باید حداکثر {{max}} باشد",
+      "pattern": "فرمت {{field}} نامعتبر است"
+    }
   },
   "notFound": {
     "title": "صفحه یافت نشد",
