@@ -77,6 +77,6 @@ export interface Form {
 }
 
 export async function fetchForms(): Promise<Form[]> {
-  const response = await fetchAPI<Form[]>('/insurance/forms');
+  const response = await fetchAPI<Form[]>('/api/insurance/forms');
   return response;
 }

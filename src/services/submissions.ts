@@ -9,6 +9,6 @@ export interface TableData {
 }
 
 export async function fetchSubmissions(): Promise<TableData> {
-  const response = await fetchAPI<TableData>('/insurance/forms/submissions');
+  const response = await fetchAPI<TableData>('/api/insurance/forms/submissions');
   return response;
 }

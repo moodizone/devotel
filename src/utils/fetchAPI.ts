@@ -1,4 +1,4 @@
-const BASE_URL = 'https://assignment.devotel.io/api';
+const BASE_URL = 'https://assignment.devotel.io';
 
 export async function fetchAPI<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const { body, ...customOptions } = options;
