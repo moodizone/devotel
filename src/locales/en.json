@@ -59,15 +59,21 @@
   "formDetails": {
     "title": "Form Details",
     "description": "View and edit form details",
-    "error": "An error occurred while loading the form",
+    "error": "Error loading form",
     "notFound": "Form not found",
     "backToForms": "Back to Forms",
     "submit": "Submit Form",
+    "submitting": "Submitting...",
+    "selectPlaceholder": "Select an option",
     "validation": {
       "required": "{{field}} is required",
+      "invalidFormat": "{{field}} has an invalid format",
       "min": "{{field}} must be at least {{min}}",
       "max": "{{field}} must be at most {{max}}",
-      "pattern": "{{field}} format is invalid"
+      "select": "Please select {{field}}",
+      "selectOne": "Please select at least one {{field}}",
+      "invalidNumber": "Please enter a valid number",
+      "invalidDate": "Please enter a valid date"
     }
   },
   "notFound": {
