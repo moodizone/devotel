@@ -13,7 +13,8 @@ interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
     | 'lead'
     | 'large'
     | 'small'
-    | 'muted';
+    | 'muted'
+    | 'label';
   as?: keyof React.JSX.IntrinsicElements;
 }
 
@@ -34,6 +35,7 @@ const Typography = React.forwardRef<HTMLElement, TypographyProps>(
       large: 'text-lg font-semibold text-zinc-900 dark:text-zinc-50',
       small: 'text-sm font-medium leading-none text-zinc-900 dark:text-zinc-50',
       muted: 'text-sm text-zinc-500 dark:text-zinc-400',
+      label: 'text-sm font-medium leading-none text-zinc-900 dark:text-zinc-50',
     };
 
     return (
