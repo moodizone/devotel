@@ -54,7 +54,7 @@ export function Table({
     // Generate options for AND filters
     visibleAndFilterColumns.forEach(filter => {
       const uniqueValues = Array.from(
-        new Set(data.map(row => row[filter.key]?.toString()).filter(Boolean))
+        new Set(data?.map(row => row[filter.key]?.toString()).filter(Boolean))
       ).sort();
       options[filter.key] = uniqueValues;
     });
@@ -62,7 +62,7 @@ export function Table({
     // Generate options for OR filters
     visibleOrFilterColumns.forEach(filter => {
       const uniqueValues = Array.from(
-        new Set(data.map(row => row[filter.key]?.toString()).filter(Boolean))
+        new Set(data?.map(row => row[filter.key]?.toString()).filter(Boolean))
       ).sort();
       options[filter.key] = uniqueValues;
     });
@@ -117,29 +117,31 @@ export function Table({
 
   // Filter and search data
   const filteredData = React.useMemo(() => {
-    return data.filter(row => {
-      if (searchQuery) {
-        const searchMatch = visibleSearchableColumns.some(column => {
-          const value = row[column]?.toString().toLowerCase() || '';
-          return value.includes(searchQuery.toLowerCase());
-        });
-        if (!searchMatch) return false;
-      }
+    return data
+      ? data.filter(row => {
+          if (searchQuery) {
+            const searchMatch = visibleSearchableColumns.some(column => {
+              const value = row[column]?.toString().toLowerCase() || '';
+              return value.includes(searchQuery.toLowerCase());
+            });
+            if (!searchMatch) return false;
+          }
 
-      for (const [column, value] of Object.entries(andFilters)) {
-        if (value && row[column]?.toString() !== value) {
-          return false;
-        }
-      }
+          for (const [column, value] of Object.entries(andFilters)) {
+            if (value && row[column]?.toString() !== value) {
+              return false;
+            }
+          }
 
-      for (const [column, values] of Object.entries(orFilters)) {
-        if (values.length > 0 && !values.includes(row[column]?.toString())) {
-          return false;
-        }
-      }
+          for (const [column, values] of Object.entries(orFilters)) {
+            if (values.length > 0 && !values.includes(row[column]?.toString())) {
+              return false;
+            }
+          }
 
-      return true;
-    });
+          return true;
+        })
+      : [];
   }, [data, searchQuery, andFilters, orFilters, visibleSearchableColumns]);
 
   const hasActiveFilters = React.useMemo(
@@ -171,11 +173,11 @@ export function Table({
   }, [filteredData, sortColumn, sortDirection]);
 
   // Paginate data
-  const totalItems = sortedData.length;
+  const totalItems = sortedData?.length ?? 0;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const paginatedData = sortedData.slice(startIndex, endIndex);
+  const paginatedData = sortedData?.slice(startIndex, endIndex);
 
   if (isLoading) {
     return <TableSkeleton columns={columns} />;

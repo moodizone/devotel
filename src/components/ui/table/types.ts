@@ -13,7 +13,7 @@ export interface FilterConfig {
 
 export interface TableProps {
   columns: Column[];
-  data: TableData['data'];
+  data?: TableData['data'];
   uniqueKey: string;
   isLoading?: boolean;
   error?: string;

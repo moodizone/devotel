@@ -3,15 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '../button';
 import { Typography } from '../typography';
 import type { Column } from './types';
-import type { TableData } from '../../../services/submissions';
+import type { DataType, TableData } from '../../../services/submissions';
 
 interface TableBodyProps {
-  data: TableData['data'][];
+  data: TableData['data'];
   columns: Column[];
   uniqueKey: string;
   hasActiveFilters: boolean;
   onClearFilters: () => void;
-  onRowClick?: (row: TableData['data']) => void;
+  onRowClick?: (row: { [key: string]: DataType }) => void;
 }
 
 export const TableBody = React.memo(
@@ -44,7 +44,7 @@ export const TableBody = React.memo(
       <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
         {data.map((row, rowIndex) => (
           <tr
-            key={row[uniqueKey] || rowIndex}
+            key={(row[uniqueKey] as string) || rowIndex}
             className={`hover:bg-zinc-50 dark:hover:bg-zinc-900 ${onRowClick ? 'cursor-pointer' : ''}`}
             onClick={() => onRowClick?.(row)}
           >

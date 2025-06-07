@@ -17,7 +17,7 @@ export default function Submissions() {
   >([]);
 
   const {
-    data: tableData = { columns: [], data: [] },
+    data: tableData,
     isLoading,
     error,
   } = useQuery<TableData>({
@@ -27,7 +27,7 @@ export default function Submissions() {
   });
 
   React.useEffect(() => {
-    if (tableData.columns.length > 0) {
+    if (tableData?.columns) {
       setColumns(
         tableData.columns.map((col, index) => ({
           key: col,
@@ -36,7 +36,7 @@ export default function Submissions() {
         }))
       );
     }
-  }, [tableData.columns]);
+  }, [tableData?.columns]);
 
   const handleToggleColumn = (columnKey: string) => {
     setColumns(prev =>
@@ -49,7 +49,7 @@ export default function Submissions() {
       return <ErrorMessage message={t('submissions.error')} />;
     }
 
-    if (!isLoading && tableData.data.length === 0) {
+    if (!isLoading && tableData?.data.length === 0) {
       return (
         <NoData
           message={t('submissions.noData')}
@@ -62,7 +62,7 @@ export default function Submissions() {
     return (
       <Table
         columns={columns}
-        data={tableData.data}
+        data={tableData?.data}
         uniqueKey="id"
         isLoading={isLoading}
         onToggleColumn={handleToggleColumn}
