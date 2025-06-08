@@ -1,4 +1,4 @@
-import type { TableData } from '../../../services/submissions';
+import type { DataType, TableData } from '../../../services/submissions';
 
 export interface Column {
   key: string;
@@ -21,5 +21,5 @@ export interface TableProps {
   searchableColumns?: string[];
   andFilterColumns?: FilterConfig[];
   orFilterColumns?: FilterConfig[];
-  onRowClick?: (row: Record<string, TableData['data']>) => void;
+  onRowClick?: (row: Record<string, DataType>) => void;
 }
