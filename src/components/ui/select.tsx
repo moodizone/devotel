@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { cn } from '../../utils/cn';
+import { useTranslation } from 'react-i18next';
 
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   className?: string;
@@ -18,11 +19,14 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       onValueChange,
       children,
       isLoading,
-      placeholder = 'Select an option',
+      placeholder,
       ...props
     },
     ref
   ) => {
+    const { t } = useTranslation();
+    const defaultPlaceholder = t('formDetails.selectPlaceholder');
+
     return (
       <div className="relative">
         <select
@@ -38,11 +42,11 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           {...props}
         >
           <option value="" disabled>
-            {placeholder}
+            {placeholder || defaultPlaceholder}
           </option>
           {children}
         </select>
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-foreground">
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-foreground rtl:right-auto rtl:left-0">
           {isLoading ? (
             <svg
               className="animate-spin h-4 w-4"

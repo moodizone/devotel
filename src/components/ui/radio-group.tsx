@@ -33,6 +33,7 @@ interface RadioGroupItemProps {
   value: string;
   disabled?: boolean;
   name: string;
+  id?: string;
 }
 
 const RadioGroupItem = React.forwardRef<HTMLInputElement, RadioGroupItemProps>(
