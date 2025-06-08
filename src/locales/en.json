@@ -74,6 +74,12 @@
       "selectOne": "Please select at least one \"{{field}}\"",
       "invalidNumber": "Please enter a valid number",
       "invalidDate": "Please enter a valid date"
+    },
+    "result": {
+      "title": "Form Submission Result",
+      "description": "Response and submitted data",
+      "response": "Response",
+      "submittedData": "Submitted Data"
     }
   },
   "notFound": {

@@ -74,6 +74,12 @@
       "selectOne": "لطفا حداقل یک \"{{field}}\" را انتخاب کنید",
       "invalidNumber": "لطفا یک عدد معتبر وارد کنید",
       "invalidDate": "لطفا یک تاریخ معتبر وارد کنید"
+    },
+    "result": {
+      "title": "نتیجه ثبت فرم",
+      "description": "پاسخ و اطلاعات ارسال شده",
+      "response": "پاسخ",
+      "submittedData": "اطلاعات ارسال شده"
     }
   },
   "notFound": {
