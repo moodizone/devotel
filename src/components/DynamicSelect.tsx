@@ -61,12 +61,17 @@ function DynamicSelect({
   });
 
   // reset value upon changing the dependOn
-  React.useEffect(() => {
-    if (field.dynamicOptions && preDependValue.current !== dependValue) {
-      preDependValue.current = dependValue;
-      setValue(name, '');
-    }
-  }, [dependValue, name, field.dynamicOptions]);
+  React.useEffect(
+    () => {
+      if (field.dynamicOptions && preDependValue.current !== dependValue) {
+        preDependValue.current = dependValue;
+        setValue(name, '');
+      }
+    },
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [dependValue, name, field.dynamicOptions]
+  );
 
   let options: string[] = [];
 

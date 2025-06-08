@@ -9,7 +9,7 @@ import type { Form, FormFieldType, GroupInput } from '../services/forms';
 import { Button } from './ui/button';
 import { Label } from './ui/label';
 import DynamicSelect from './DynamicSelect';
-import { submitForm } from '../services/submissions';
+import { submitForm, type SubmitResponseType } from '../services/submissions';
 import { Modal, ModalContent, ModalHeader, ModalTitle, ModalDescription } from './ui/modal';
 
 interface FormBuilderProps {
@@ -19,7 +19,10 @@ interface FormBuilderProps {
 export function FormBuilder({ details }: FormBuilderProps) {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [responseData, setResponseData] = useState<{ response: any; data: any } | null>(null);
+  const [responseData, setResponseData] = useState<{
+    response: SubmitResponseType;
+    data: Record<string, unknown>;
+  } | null>(null);
   const { control, getValues, handleSubmit, formState, setValue, watch } = useForm({
     mode: 'onSubmit',
   });
@@ -28,7 +31,7 @@ export function FormBuilder({ details }: FormBuilderProps) {
   //================================
   // Handlers
   //================================
-  async function onSubmit(data: any) {
+  async function onSubmit(data: Record<string, unknown>) {
     const response = await submitForm(data);
     setResponseData({ response, data });
     setIsModalOpen(true);
@@ -271,14 +274,24 @@ export function FormBuilder({ details }: FormBuilderProps) {
           </ModalHeader>
           <div className="space-y-6 p-4">
             <div className="space-y-2">
-              <h3 className="text-sm font-medium text-left rtl:text-right">{t('formDetails.result.response')}</h3>
-              <pre className="p-4 rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50 overflow-auto max-h-[300px] font-mono text-sm border border-zinc-200 dark:border-zinc-800 ltr" dir="ltr">
+              <h3 className="text-sm font-medium text-left rtl:text-right">
+                {t('formDetails.result.response')}
+              </h3>
+              <pre
+                className="p-4 rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50 overflow-auto max-h-[300px] font-mono text-sm border border-zinc-200 dark:border-zinc-800 ltr"
+                dir="ltr"
+              >
                 {JSON.stringify(responseData?.response, null, 2)}
               </pre>
             </div>
             <div className="space-y-2">
-              <h3 className="text-sm font-medium text-left rtl:text-right">{t('formDetails.result.submittedData')}</h3>
-              <pre className="p-4 rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50 overflow-auto max-h-[300px] font-mono text-sm border border-zinc-200 dark:border-zinc-800 ltr" dir="ltr">
+              <h3 className="text-sm font-medium text-left rtl:text-right">
+                {t('formDetails.result.submittedData')}
+              </h3>
+              <pre
+                className="p-4 rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50 overflow-auto max-h-[300px] font-mono text-sm border border-zinc-200 dark:border-zinc-800 ltr"
+                dir="ltr"
+              >
                 {JSON.stringify(responseData?.data, null, 2)}
               </pre>
             </div>

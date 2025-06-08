@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
 
 import { Typography } from '../components/ui/typography';
 import { Button } from '../components/ui/button';
