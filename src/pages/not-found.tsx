@@ -10,9 +10,9 @@ export default function NotFound() {
       <Typography variant="lead" className="max-w-md">
         The page you're looking for doesn't exist or has been moved.
       </Typography>
-      <Button asChild>
+      <Button>
         <Link to="/submission">Go to Home</Link>
       </Button>
     </div>
   );
-} 
+}
