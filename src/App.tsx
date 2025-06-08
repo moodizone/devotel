@@ -8,11 +8,12 @@ import SubmissionDetails from './pages/submission-details';
 import Forms from './pages/forms';
 import FormDetails from './pages/form-details';
 import NotFound from './pages/not-found';
+import { BASE_URL } from './main';
 
 export default function App() {
   return (
     <QueryProvider>
-      <Router>
+      <Router basename={BASE_URL}>
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Navigate to="/submissions" replace />} />
