@@ -1,54 +1,149 @@
-# React + TypeScript + Vite
+# Devotel - Dynamic Insurance Form Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, dynamic insurance form builder application that allows users to create, manage, and submit insurance applications with conditional logic and real-time validation.
 
-Currently, two official plugins are available:
+## 🌟 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Core Features
+- **Dynamic Form Generation**
+  - ✅ Fetches form structures from API
+  - ✅ Renders forms dynamically without hardcoding
+  - ✅ Supports nested form sections (e.g., Address, Vehicle Details)
+  - ✅ Conditional field visibility based on user responses
+  - ✅ Dynamic option loading from API (e.g., states based on country)
 
-## Expanding the ESLint configuration
+- **Form Management**
+  - ✅ Real-time form validation
+  - ✅ Conditional field dependencies
+  - ✅ Nested form sections
+  - ✅ Dynamic field options
+  - ✅ Form submission handling
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Application List View**
+  - ✅ Customizable table columns
+  - ✅ Sorting and filtering capabilities
+  - ✅ Pagination support
+  - ✅ Search functionality
+  - ✅ Column visibility toggle
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Enhanced Features
+- **Internationalization**
+  - ✅ Multi-language support (English & Persian)
+  - ✅ RTL layout support
+  - ✅ Direction-aware components
+
+- **UI/UX**
+  - ✅ Responsive design
+  - ✅ Dark mode support
+  - ✅ Modern UI components
+  - ✅ Loading states
+  - ✅ Error handling
+
+## 🛠️ Tech Stack
+
+### Core Technologies
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+
+### Key Libraries
+- `react-hook-form` - Form handling and validation
+- `@tanstack/react-query` - API data fetching and caching
+- `i18next` - Internationalization
+- `react-router-dom` - Routing
+- `tailwind-merge` & `clsx` - Utility-first CSS
+
+### Development Tools
+- ESLint
+- Prettier
+- TypeScript
+- Vite
+
+## 📁 Project Structure
+
+```
+src/
+├── app/          # Application configuration
+├── assets/       # Static assets
+├── components/   # Reusable UI components
+│   └── ui/       # Base UI components
+├── locales/      # Translation files
+├── pages/        # Page components
+├── providers/    # Context providers
+├── services/     # API services
+└── utils/        # Utility functions
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. **Installation**
+   ```bash
+   npm install
+   ```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+2. **Development**
+   ```bash
+   npm run dev
+   ```
+
+3. **Build**
+   ```bash
+   npm run build
+   ```
+
+4. **Linting**
+   ```bash
+   npm run lint
+   ```
+
+## 📋 Project Progress
+
+### Completed Features
+- ✅ Dynamic form generation and rendering
+- ✅ Conditional field logic
+- ✅ Form validation
+- ✅ Multi-language support
+- ✅ RTL layout support
+- ✅ Dark mode
+- ✅ Customizable list view
+- ✅ API integration
+
+### In Progress
+- ⏳ Autosave drafts
+- ⏳ Unit tests
+- ⏳ Drag-and-drop field reordering
+
+## 🎯 Acceptance Criteria
+
+### Form Building
+- [x] Dynamic form structure from API
+- [x] Conditional field visibility
+- [x] Nested form sections
+- [x] Dynamic field options
+- [x] Form validation
+
+### List View
+- [x] Customizable columns
+- [x] Sorting and filtering
+- [x] Pagination
+- [x] Search functionality
+
+### Technical Requirements
+- [x] Dynamic field handling
+- [x] API integration
+- [x] Responsive design
+- [x] React best practices
+- [x] Internationalization
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License.
