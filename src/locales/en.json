@@ -66,12 +66,12 @@
     "submitting": "Submitting...",
     "selectPlaceholder": "Select an option",
     "validation": {
-      "required": "{{field}} is required",
-      "invalidFormat": "{{field}} has an invalid format",
-      "min": "{{field}} must be at least {{min}}",
-      "max": "{{field}} must be at most {{max}}",
-      "select": "Please select {{field}}",
-      "selectOne": "Please select at least one {{field}}",
+      "required": "\"{{field}}\" is required",
+      "invalidFormat": "\"{{field}}\" has an invalid format",
+      "min": "\"{{field}}\" must be at least {{min}}",
+      "max": "\"{{field}}\" must be at most {{max}}",
+      "select": "Please select \"{{field}}\"",
+      "selectOne": "Please select at least one \"{{field}}\"",
       "invalidNumber": "Please enter a valid number",
       "invalidDate": "Please enter a valid date"
     }

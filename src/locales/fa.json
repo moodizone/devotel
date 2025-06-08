@@ -66,12 +66,12 @@
     "submitting": "در حال ثبت...",
     "selectPlaceholder": "یک گزینه انتخاب کنید",
     "validation": {
-      "required": "{{field}} الزامی است",
+      "required": "\"{{field}}\" الزامی است",
       "invalidFormat": "فرمت {{field}} نامعتبر است",
-      "min": "{{field}} باید حداقل {{min}} باشد",
-      "max": "{{field}} باید حداکثر {{max}} باشد",
-      "select": "لطفا {{field}} را انتخاب کنید",
-      "selectOne": "لطفا حداقل یک {{field}} را انتخاب کنید",
+      "min": "\"{{field}}\" باید حداقل {{min}} باشد",
+      "max": "\"{{field}}\" باید حداکثر {{max}} باشد",
+      "select": "لطفا \"{{field}}\" را انتخاب کنید",
+      "selectOne": "لطفا حداقل یک \"{{field}}\" را انتخاب کنید",
       "invalidNumber": "لطفا یک عدد معتبر وارد کنید",
       "invalidDate": "لطفا یک تاریخ معتبر وارد کنید"
     }
