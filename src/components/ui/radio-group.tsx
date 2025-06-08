@@ -32,19 +32,17 @@ interface RadioGroupItemProps {
   className?: string;
   value: string;
   disabled?: boolean;
+  name: string;
 }
 
 const RadioGroupItem = React.forwardRef<HTMLInputElement, RadioGroupItemProps>(
-  ({ className, value, disabled, ...props }, ref) => {
+  ({ className, value, disabled, name, ...props }, ref) => {
     const { value: selectedValue, onValueChange } = React.useContext(RadioGroupContext);
     const checked = value === selectedValue;
 
-    const handleChange = React.useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        onValueChange?.(value);
-      },
-      [value, onValueChange]
-    );
+    const handleChange = React.useCallback(() => {
+      onValueChange?.(value);
+    }, [value, onValueChange]);
 
     return (
       <div className="flex items-center space-x-2">
@@ -55,6 +53,7 @@ const RadioGroupItem = React.forwardRef<HTMLInputElement, RadioGroupItemProps>(
           checked={checked}
           disabled={disabled}
           onChange={handleChange}
+          name={name}
           className={cn(
             'h-4 w-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
             className

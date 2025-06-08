@@ -11,7 +11,18 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
-  ({ className, value, onValueChange, children, isLoading, placeholder = "Select an option", ...props }, ref) => {
+  (
+    {
+      className,
+      value,
+      onValueChange,
+      children,
+      isLoading,
+      placeholder = 'Select an option',
+      ...props
+    },
+    ref
+  ) => {
     return (
       <div className="relative">
         <select
